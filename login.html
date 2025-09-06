@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EcoFinds Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 900px;
+      max-width: 95%;
+      height: 600px;
+      display: flex;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 12px 45px rgba(0,0,0,0.18);
+      overflow: hidden;
+    }
+
+    /* Left side (white background) */
+    .left {
+      flex: 1.2;
+      background: #ffffff; /* changed to white */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 30px;
+      color: #2d6a4f; /* green text for contrast */
+      text-align: center;
+    }
+    .left img {
+      width: 220px;
+      height: auto;
+      margin-bottom: 25px;
+    }
+    .left h2 {
+      margin-bottom: 12px;
+      font-size: 26px;
+    }
+    .left p {
+      font-size: 15px;
+      line-height: 1.5;
+      max-width: 320px;
+    }
+
+    /* Right side (light green background) */
+    .right {
+      flex: 1;
+      background: #a7d7a9; /* light green */
+      padding: 50px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #fff; /* text color white */
+    }
+    .logo {
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 35px;
+    }
+    h3 {
+      margin: 0 0 25px;
+      text-align: center;
+      font-weight: 500;
+    }
+    label {
+      font-size: 14px;
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 8px 0 22px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+    .options {
+      text-align: right;
+      font-size: 12px;
+      margin-bottom: 22px;
+    }
+    .options a {
+      color: #fff; /* white link on green */
+      text-decoration: none;
+    }
+    .btn {
+      background: #2d6a4f;
+      color: #fff;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+    .btn:hover { background: #1b4332; }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      margin: 18px 0;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
+    .divider:not(:empty)::before { margin-right: .75em; }
+    .divider:not(:empty)::after { margin-left: .75em; }
+
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ddd;
+      padding: 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #444;
+      cursor: pointer;
+      background: #fff;
+    }
+    .google-btn img {
+      width: 18px;
+      margin-right: 8px;
+    }
+    .signup {
+      margin-top: 25px;
+      text-align: center;
+      font-size: 13px;
+    }
+    .signup a {
+      color: #fff; /* white link on green */
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left section -->
+    <div class="left">
+      <img src="C:\Users\admin\OneDrive\Desktop\odoo\abb096d9-a89a-40e6-b095-ea181eb2484f.jpg" alt="EcoFinds Logo">
+      <h2>EcoFinds</h2>
+      <p style="font-size: 20px;">Shop Smart. Live Green</p>
+    </div>
+
+    <!-- Right section -->
+    <div class="right">
+      <h3>Welcome Back</h3>
+
+      <form>
+        <label for="email">Username or Email</label>
+        <input type="email" id="email" placeholder="you@example.com" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+
+        <div class="options">
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn">Sign In</button>
+
+        <div class="divider">or</div>
+
+        <button type="button" class="google-btn">
+          <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google"> Sign in with Google
+        </button>
+      </form>
+
+      <div class="signup">
+        New to EcoFinds? <a href="#">Create Account</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
