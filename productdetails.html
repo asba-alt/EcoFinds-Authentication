@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Horizontal Product Feed with Back Button</title>
+  <style>
+    body {
+      margin: 0;
+      background: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      border-bottom: 2px solid #a7d7a9;
+      background: #f9f9f9;
+      box-shadow: 0 2px 6px rgba(167, 215, 169, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      gap: 1rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #4b6f49;
+      letter-spacing: 0.06em;
+      user-select: none;
+      flex-grow: 1;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .btn-back {
+      background: transparent;
+      border: 2px solid #a7d7a9;
+      color: #4b6f49;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    .btn-back:hover {
+      background-color: #a7d7a9;
+      color: white;
+    }
+    .cart-icon {
+      font-size: 1.6rem;
+      color: #a7d7a9;
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+    }
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: #4b6f49;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: 50%;
+      padding: 2px 6px;
+      pointer-events: none;
+    }
+    .feed-container {
+      margin: 32px auto;
+      max-width: 1000px;
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: #a7d7a9 transparent;
+      padding-left: 40px;
+      padding-right: 40px;
+      scroll-behavior: smooth;
+    }
+    .feed-container::-webkit-scrollbar {
+      height: 10px;
+    }
+    .feed-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .feed-container::-webkit-scrollbar-thumb {
+      background-color: #a7d7a9;
+      border-radius: 10px;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 25px rgba(167, 215, 169, 0.4);
+      border: 2px solid #a7d7a9;
+      width: 320px;
+      flex-shrink: 0;
+      overflow: hidden;
+      color: #2d2d2d;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 40px rgba(167, 215, 169, 0.7);
+    }
+    .product-image {
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      background: #f9f9f9;
+      border-bottom: 3px solid #a7d7a9;
+    }
+    .product-info {
+      padding: 20px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .product-title {
+      font-size: 1.22rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #4b6f49;
+      letter-spacing: 0.03em;
+    }
+    .product-description {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      flex-grow: 1;
+      margin-bottom: 16px;
+      user-select: text;
+    }
+    .product-price {
+      font-family: 'Arial Black', Arial, sans-serif;
+      font-size: 1.4rem;
+      color: #4b6f49;
+      margin-bottom: 16px;
+      font-weight: 900;
+    }
+    .add-to-cart-btn {
+      background: #a7d7a9;
+      border: 2.5px solid #8cc18a;
+      border-radius: 12px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 12px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      box-shadow: 0 3px 12px rgba(167, 215, 169, 0.6);
+    }
+    .add-to-cart-btn:hover {
+      background-color: #8cc18a;
+      box-shadow: 0 6px 18px rgba(140, 193, 138, 0.85);
+      color: #fff;
+    }
+    @media (max-width: 700px) {
+      .feed-container {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .product-card {
+        width: 280px;
+      }
+      header {
+        padding: 12px 20px;
+      }
+      .btn-back {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">EcoFinds</div>
+    <div class="header-right">
+      <button class="btn-back" onclick="history.back()" aria-label="Go back">Back</button>
+      <div class="cart-icon" aria-label="Shopping cart">
+        🛒
+        <div class="cart-badge" aria-live="polite">3</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="feed-container" aria-label="Product feed">
+      <article class="product-card" tabindex="0">
+        <img
+          src="https://m.media-amazon.com/images/I/71Q9dF0rcdL.AC_UL320.jpg"
+          alt="Bluetooth Wireless Headphones"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-title">Bluetooth Wireless Headphones</h2>
+          <p class="product-description">
+            Premium wireless headphones with active noise cancellation, deep bass, and up to 20 hours battery life for seamless listening.
+          </p>
+          <div class="product-price">₹59,999</div>
+          <button class="add-to-cart-btn" aria-label="Add Bluetooth Wireless Headphones to cart">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+      <article class="product-card" tabindex="0">
+        <img
+          src="https://m.media-amazon.com/images/I/71ZcLdp3lhL.AC_UL320.jpg"
+          alt="Smart Watch Fitness Tracker"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-title">Smart Watch Fitness Tracker</h2>
+          <p class="product-description">
+            Track your fitness activities and monitor health stats with this sleek smartwatch, featuring heart rate monitor and sleep tracking.
+          </p>
+          <div class="product-price">₹89,999</div>
+          <button class="add-to-cart-btn" aria-label="Add Smart Watch Fitness Tracker to cart">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+      <article class="product-card" tabindex="0">
+        <img
+          src="https://m.media-amazon.com/images/I/71VFLwVEdlL.AC_UL320.jpg"
+          alt="Portable Bluetooth Speaker"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-title">Portable Bluetooth Speaker</h2>
+          <p class="product-description">
+            Compact speaker with excellent sound quality and durable design, perfect for outdoor and indoor use.
+          </p>
+          <div class="product-price">₹39,999</div>
+          <button class="add-to-cart-btn" aria-label="Add Portable Bluetooth Speaker to cart">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+      <article class="product-card" tabindex="0">
+        <img
+          src="https://m.media-amazon.com/images/I/81aZ9G-N98L.AC_UL320.jpg"
+          alt="Waterproof Laptop Backpack"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-title">Waterproof Laptop Backpack</h2>
+          <p class="product-description">
+            Spacious and waterproof backpack with multiple compartments for laptops and accessories. Comfortable to carry all day.
+          </p>
+          <div class="product-price">₹49,999</div>
+          <button class="add-to-cart-btn" aria-label="Add Waterproof Laptop Backpack to cart">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+</body>
+</html>
