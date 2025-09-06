@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Previous Purchase - EcoFinds Desktop</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+<style>
+  body {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    background-color: #f6fbf6;
+    margin: 0;
+    padding: 3rem 6rem;
+    color: #264d26;
+  }
+  h1 {
+    font-weight: 900;
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 3.5rem;
+    color: #3b7d3b;
+    user-select: none;
+  }
+  .container-main {
+    max-width: 1200px;
+    margin: auto;
+    background: #fff;
+    border-radius: 28px;
+    border: 3px solid #a7d7a9;
+    padding: 2.5rem 3rem;
+    box-shadow: 0 12px 40px rgba(167, 215, 169, 0.2);
+  }
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.4rem;
+  }
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2e6f2e;
+    letter-spacing: 0.04em;
+    user-select: none;
+  }
+  .right-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .icon-cart {
+    font-size: 2rem;
+    color: #224d22;
+    position: relative;
+    cursor: pointer;
+  }
+  .cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: #e04f4f;
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .user-pic {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #a7d7a9;
+    cursor: pointer;
+  }
+  .search-filter {
+    display: flex;
+    align-items: center;
+    gap: 1.7rem;
+    margin-bottom: 3rem;
+    flex-wrap: nowrap;
+  }
+  .search-bar {
+    flex-grow: 1;
+    padding: 0.65rem 1.1rem;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    border: 3px solid #a7d7a9;
+    outline: none;
+    color: #246824;
+    transition: border-color 0.25s ease;
+  }
+  .search-bar:focus {
+    border-color: #8bc08b;
+    box-shadow: 0 0 10px #8bc08b;
+  }
+  .btn-filter-group {
+    padding: 0.65rem 2rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 12px;
+    border: 3px solid #a7d7a9;
+    background-color: #a7d7a9;
+    color: #134d13;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+  .btn-filter-group:hover {
+    background-color: #8bc08b;
+  }
+  .purchase-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+  }
+  .purchase-card {
+    display: flex;
+    background: #f9fff9;
+    border-radius: 22px;
+    box-shadow: 0 10px 30px rgba(167, 215, 169, 0.25);
+    padding: 22px 32px;
+    align-items: center;
+    gap: 2rem;
+  }
+  .purchase-img {
+    width: 150px;
+    height: 120px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 4px solid #a7d7a9;
+    flex-shrink: 0;
+  }
+  .purchase-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    flex-grow: 1;
+  }
+  .purchase-name {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #2a622a;
+  }
+  .purchase-detail {
+    font-size: 1.1rem;
+    color: #3a743a;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+  <div class="container-main" role="main" aria-label="Previous purchases main container">
+    <div class="header-row">
+      <div class="logo">EcoFinds</div>
+      <div class="right-icons" role="region" aria-label="User menu and cart">
+        <div class="icon-cart" role="button" tabindex="0" aria-label="Shopping cart with 2 items">
+          <i class="bi bi-cart3"></i>
+          <span class="cart-badge" aria-live="polite">2</span>
+        </div>
+        <img src="user-profile.jpg" alt="User profile picture" class="user-pic" />
+      </div>
+    </div>
+    <h1>Previous Purchase</h1>
+    <div class="search-filter">
+      <input type="search" class="search-bar" placeholder="Search ...." aria-label="Search previous purchases" />
+      <button class="btn-filter-group" type="button" aria-label="Sort previous purchases">Sort</button>
+      <button class="btn-filter-group" type="button" aria-label="Filter previous purchases">Filter</button>
+      <button class="btn-filter-group" type="button" aria-label="Group previous purchases">Groupby</button>
+    </div>
+    <div class="purchase-list">
+      <article class="purchase-card" tabindex="0" aria-label="Vintage Wooden Chair purchase, price 1500, category Furniture, seller Aadhya Traders">
+        <img class="purchase-img" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80" alt="Vintage Wooden Chair" />
+        <div class="purchase-info">
+          <div class="purchase-name">Vintage Wooden Chair</div>
+          <div class="purchase-detail">Price: ₹1,500</div>
+          <div class="purchase-detail">Category: Furniture</div>
+          <div class="purchase-detail">Seller: Aadhya Traders</div>
+        </div>
+      </article>
+      <article class="purchase-card" tabindex="0" aria-label="Electric Guitar purchase, price 12000, category Musical Instruments, seller SecondSound">
+        <img class="purchase-img" src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=80" alt="Electric Guitar with Case" />
+        <div class="purchase-info">
+          <div class="purchase-name">Electric Guitar with Case</div>
+          <div class="purchase-detail">Price: ₹12,000</div>
+          <div class="purchase-detail">Category: Musical Instruments</div>
+          <div class="purchase-detail">Seller: SecondSound</div>
+        </div>
+      </article>
+      <article class="purchase-card" tabindex="0" aria-label="Retro Camera purchase, price 3500, category Electronics, seller Collector's Hub">
+        <img class="purchase-img" src="https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=600&q=80" alt="Retro Camera" />
+        <div class="purchase-info">
+          <div class="purchase-name">Retro Camera</div>
+          <div class="purchase-detail">Price: ₹3,500</div>
+          <div class="purchase-detail">Category: Electronics</div>
+          <div class="purchase-detail">Seller: Collector's Hub</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</body>
+</html>
