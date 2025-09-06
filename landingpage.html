@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dashboard with Search and Features</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+<style>
+  body {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    margin: 0;
+    background-color: #fff;
+    color: #222;
+  }
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a7d7a9;
+    padding: 0.8rem 1.4rem;
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+  .menu-btn, .settings-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #000;
+  }
+  .menu-btn {
+    margin-right: 1rem;
+  }
+  .logo-text {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #000;
+    user-select: none;
+  }
+  .top-right-icons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .icon-btn {
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    color: #000;
+  }
+  .cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    font-size: 0.75rem;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+  }
+  .profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #000;
+    cursor: pointer;
+  }
+
+  /* Side Navigation */
+  .side-nav, .settings-nav {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #a7d7a9;
+    box-shadow: 2px 0 6px rgba(0,0,0,0.15);
+    padding-top: 60px;
+    transition: all 0.3s ease;
+    z-index: 1040;
+  }
+  .side-nav {
+    left: -250px;
+  }
+  .side-nav.open {
+    left: 0;
+  }
+  .settings-nav {
+    right: -250px;
+  }
+  .settings-nav.open {
+    right: 0;
+  }
+  .side-nav a, .settings-nav a {
+    padding: 1rem 2rem;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background 0.2s;
+  }
+  .side-nav a:hover, .settings-nav a:hover {
+    background-color: #8bc08b;
+    color: #000;
+  }
+
+  /* Overlay */
+  .overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.35);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 1035;
+  }
+  .overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Controls Section */
+  .controls-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+    margin-top: 0.8rem;
+  }
+  .search-container {
+    flex: 1 1 320px;
+    margin-right: 1rem;
+  }
+  .form-control {
+    border: 2px solid #a7d7a9;
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    color: #222;
+    transition: border-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .form-control:focus {
+    outline: none;
+    border-color: #8bc08b;
+    box-shadow: 0 0 8px #8bc08b;
+  }
+
+  .icon-features {
+    display: flex;
+    gap: 22px;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    flex: 0 1 auto;
+  }
+  .icon-feature {
+    cursor: pointer;
+    color: #a7d7a9;
+    font-size: 1.8rem;
+    position: relative;
+    padding: 6px;
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.3s;
+  }
+  .icon-feature:hover, .icon-feature:focus {
+    color: #8bc08b;
+    background-color: rgba(167, 215, 169, 0.25);
+    outline: none;
+  }
+  .icon-feature[aria-label]::after {
+    content: attr(aria-label);
+    position: absolute;
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .icon-feature:hover::after, .icon-feature:focus::after {
+    opacity: 1;
+  }
+
+  /* Banner */
+  .banner {
+    position: relative;
+    background: url("download.jpeg") center/cover no-repeat;
+    height: 300px;
+    border-radius: 12px;
+    margin: 1rem 1.5rem 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .banner h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    user-select: none;
+  }
+  /* Categories Section */
+  .categories-section {
+    padding: 1rem 1.5rem 2rem 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+    gap: 20px;
+    user-select: none;
+  }
+  .category-card {
+    background: #fbfef9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .category-card:hover {
+    transform: scale(1.07);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+  .category-image {
+    width: 100%;
+    height: 140px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 12px;
+  }
+  .category-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #222;
+  }
+</style>
+</head>
+<body>
+  <!-- Side Navigation Menu -->
+  <nav id="sideNav" class="side-nav" aria-label="Side navigation menu">
+    <a href="#">My Listings</a>
+    <a href="#">Add Product</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Settings</a>
+  </nav>
+
+ 
+
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <button id="menuToggle" class="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sideNav">
+      <i class="bi bi-list"></i>
+    </button>
+    <div class="logo-text">EcoFinds</div>
+    <div class="top-right-icons">
+      <button class="icon-btn" aria-label="Shopping Cart">
+        <i class="bi bi-cart3"></i>
+        <span class="cart-badge" aria-live="polite" aria-atomic="true">2</span>
+      </button>
+      <img src="banner2.jpg" alt="User Profile" class="profile-pic" />
+      
+    </div>
+  </header>
+
+  <!-- Controls Section -->
+  <section class="controls-wrapper" role="region" aria-label="Search and feature controls">
+    <div class="search-container">
+      <input type="search" placeholder="Search products by keyword" aria-label="Product search keyword" class="form-control" id="searchInput" />
+    </div>
+    <div class="icon-features" role="group" aria-label="Additional product features">
+      <div class="icon-feature" tabindex="0" role="button" aria-label="Filter Products">
+        <i class="bi bi-funnel"></i>
+      </div>
+      <div class="icon-feature" tabindex="0" role="button" aria-label="Sort Products">
+        <i class="bi bi-sort-alpha-down"></i>
+      </div>
+      <div class="icon-feature" tabindex="0" role="button" aria-label="Group Products">
+        <i class="bi bi-collection"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner Image -->
+  <section class="banner" role="img" aria-label="Banner showing shopping products">
+    <h1>Welcome to EcoFinds</h1>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-section" aria-label="Product categories">
+    <article class="category-card" tabindex="0" role="button" aria-pressed="false">
+      <img class="category-image" src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=500&q=60" alt="Clothing category" />
+      <div class="category-name">Clothing</div>
+    </article>
+    <article class="category-card" tabindex="0" role="button" aria-pressed="false">
+      <img class="category-image" src="https://images.unsplash.com/photo-1510552776732-03e61cf4b144?auto=format&fit=crop&w=500&q=60" alt="Electronics category" />
+      <div class="category-name">Electronics</div>
+    </article>
+    <article class="category-card" tabindex="0" role="button" aria-pressed="false">
+      <img class="category-image" src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=500&q=60" alt="Books category" />
+      <div class="category-name">Books</div>
+    </article>
+    <article class="category-card" tabindex="0" role="button" aria-pressed="false">
+      <img class="category-image" src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=500&q=60" alt="Shoes category" />
+      <div class="category-name">Shoes</div>
+    </article>
+  </section>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sideNav = document.getElementById('sideNav');
+    const settingsToggle = document.getElementById('settingsToggle');
+    const settingsNav = document.getElementById('settingsNav');
+    const overlay = document.getElementById('overlay');
+
+    // Handles main menu toggle
+    menuToggle.addEventListener('click', () => {
+      const isOpen = sideNav.classList.toggle('open');
+      if (isOpen) {
+        settingsNav.classList.remove('open'); // close settings if open
+        settingsToggle.setAttribute('aria-expanded', 'false');
+        overlay.classList.add('show');
+      } else {
+        overlay.classList.remove('show');
+      }
+      menuToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Handles settings menu toggle
+    settingsToggle.addEventListener('click', () => {
+      const isOpen = settingsNav.classList.toggle('open');
+      if (isOpen) {
+        sideNav.classList.remove('open'); // close main menu if open
+        menuToggle.setAttribute('aria-expanded', 'false');
+        overlay.classList.add('show');
+      } else {
+        overlay.classList.remove('show');
+      }
+      settingsToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close menus when clicking overlay
+    overlay.addEventListener('click', () => {
+      sideNav.classList.remove('open');
+      settingsNav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      settingsToggle.setAttribute('aria-expanded', 'false');
+      overlay.classList.remove('show');
+    });
+
+    // Close menus on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        sideNav.classList.remove('open');
+        settingsNav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        settingsToggle.setAttribute('aria-expanded', 'false');
+        overlay.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
