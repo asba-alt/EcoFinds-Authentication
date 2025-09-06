@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFinds Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --light-green: #E0F2F1;
+            --dark-green: #388E3C;
+            --text-color: #2E7D32;
+            --input-border: #BBDEFB;
+            --white: #FFFFFF;
+            --grey-text: #757575;
+            --mid-green-bg: #C8E6C9;
+            --darker-grey-text: #616161;
+            --page-bg-grey: #EAEAEA;
+            --dark-button-bg: #1B5E20;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--page-bg-grey);
+        }
+
+        .signup-container {
+            display: flex;
+            width: 1000px;
+            height: 700px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: var(--white);
+        }
+
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .logo-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 180px;
+            height: auto;
+        }
+
+        .brand-name {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .slogan {
+            font-size: 1.3em;
+            color: var(--grey-text);
+            font-weight: 400;
+        }
+
+        .right-panel {
+            flex: 1;
+            background-color: var(--mid-green-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+        }
+
+        .welcome-text {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--dark-green);
+    margin-bottom: 35px;
+    margin-top: 70px; 
+}
+
+
+        .form-group {
+            width: 100%;
+            max-width: 350px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1em;
+            color: var(--darker-grey-text);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: calc(100% - 20px);
+            padding: 14px 12px;
+            border: 1px solid var(--input-border);
+            border-radius: 5px;
+            font-size: 1.1em;
+            color: var(--darker-grey-text);
+            background-color: var(--white);
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--dark-green);
+        }
+
+        .signup-button {
+            width: 100%;
+            max-width: 350px;
+            padding: 17px;
+            background-color: var(--dark-button-bg);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .signup-button:hover {
+            background-color: #1A5229;
+        }
+
+        .divider {
+            width: 100%;
+            max-width: 350px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            color: var(--grey-text);
+            font-size: 1em;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #BDBDBD;
+            margin: 0 10px;
+        }
+
+        .google-signup-button {
+            width: 100%;
+            max-width: 350px;
+            padding: 14px;
+            background-color: var(--white);
+            color: var(--grey-text);
+            border: 1px solid #BDBDBD;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .google-signup-button:hover {
+            background-color: #F5F5F5;
+            border-color: #757575;
+        }
+
+        .google-icon {
+            width: 22px;
+            height: 22px;
+        }
+
+        .login-link {
+            margin-top: 30px;
+            font-size: 1em;
+            color: var(--grey-text);
+        }
+
+        .login-link a {
+            color: var(--dark-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="left-panel">
+            <div class="logo-wrapper">
+                <img src="C:\Users\admin\OneDrive\Desktop\odoo\img1.jpg" alt="EcoFinds Logo" class="logo">
+            </div>
+            <div class="brand-name">EcoFinds</div>
+            <div class="slogan">Shop Smart. Live Green</div>
+        </div>
+        <div class="right-panel">
+            <div class="welcome-text">Create Your Account</div>
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Min. 8 characters" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+            </div>
+
+            <button type="submit" class="signup-button">Sign Up</button>
+
+            <div class="divider">or</div>
+
+            <button type="button" class="google-signup-button">
+                <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google logo" class="google-icon">
+                Sign up with Google
+            </button>
+
+            <div class="login-link">
+                Already have an account? <a href="#">Sign In</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

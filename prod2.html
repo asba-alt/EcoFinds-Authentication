@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>EcoFinds Product Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            margin: 0;
+            background: #f2f6f2;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            color: #173a2e;
+        }
+
+        .dashboard-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px 40px 40px 40px;
+            background: #e6f5ea;
+            border-radius: 28px;
+            box-shadow: 0 8px 36px rgba(33, 56, 37, 0.15);
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+
+        .eco-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .eco-logo img {
+            height: 72px; /* Bigger logo */
+            margin-right: 16px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(70, 180, 120, 0.3);
+        }
+
+        .eco-logo span {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #195a38;
+            user-select: none;
+        }
+
+        .cart-icon {
+            background: white;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 12px rgba(70, 180, 120, 0.15);
+            cursor: pointer;
+        }
+
+        .cart-icon img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .dashboard-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: #195a38;
+            user-select: none;
+        }
+
+        form.product-form {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 3px 18px rgba(61, 90, 63, 0.1);
+        }
+
+        /* Two column grid for grouped fields */
+        .form-row {
+            display: flex;
+            gap: 28px;
+            margin-bottom: 22px;
+        }
+
+        /* Each form column */
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-section,
+        .image-upload {
+            margin-bottom: 24px;
+        }
+
+        label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #268353;
+            user-select: none;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #cce3d6;
+            background: #f7fcf8;
+            font-size: 1.05rem;
+            outline: none;
+            transition: border-color 0.2s;
+            resize: vertical;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #67c691;
+            background: #e6f5ea;
+        }
+
+        textarea {
+            min-height: 60px;
+        }
+
+        .image-upload label {
+            background: #e6f5ea;
+            border: 2px dashed #a3d2be;
+            border-radius: 20px;
+            padding: 40px 0;
+            font-size: 1.2rem;
+            color: #4b8665;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            transition: background 0.2s;
+            user-select: none;
+        }
+
+        .image-upload label:hover {
+            background: #d6f0e3;
+        }
+
+        .image-upload input[type="file"] {
+            display: none;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: #268353;
+            margin-bottom: 20px;
+            user-select: none;
+        }
+
+        .dashboard-action {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .dashboard-action button {
+            background: linear-gradient(90deg, #268353, #67c691);
+            border: none;
+            color: white;
+            padding: 16px 44px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 3px 12px rgba(60, 110, 80, 0.15);
+            transition: background 0.2s;
+            user-select: none;
+        }
+
+        .dashboard-action button:hover {
+            background: linear-gradient(90deg, #195a38, #45b86f);
+        }
+
+        /* Responsive for small screens */
+        @media (max-width: 700px) {
+            .dashboard-container {
+                max-width: 460px;
+                padding: 32px 24px;
+            }
+
+            .dashboard-header {
+                margin-bottom: 28px;
+            }
+
+            .dashboard-title {
+                font-size: 1.4rem;
+                margin-bottom: 24px;
+            }
+
+            .eco-logo img {
+                height: 48px;
+                margin-right: 12px;
+            }
+
+            .eco-logo span {
+                font-size: 1.4rem;
+            }
+
+            .cart-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .cart-icon img {
+                width: 22px;
+                height: 22px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .dashboard-action button {
+                width: 100%;
+                padding: 14px 0;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="eco-logo">
+                <img src="https://img.icons8.com/?size=100&id=7XfpxEgKkacu&format=png" alt="EcoFinds Logo" />
+                <span>EcoFinds</span>
+            </div>
+            <div class="cart-icon" title="Shopping Cart">
+                <img src="https://img.icons8.com/ios-filled/24/4b8665/shopping-cart.png" alt="Cart" />
+            </div>
+        </div>
+        <div class="dashboard-title">Add a new Product</div>
+        <form class="product-form" novalidate>
+            <div class="image-upload form-section">
+                <label for="product-image">Add product<br />(Click or Drag Image Here)
+                    <input id="product-image" type="file" accept="image/*" />
+                </label>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="title">Product Title</label>
+                    <input id="title" type="text" required />
+                </div>
+                <div class="form-group">
+                    <label for="category">Product Category</label>
+                    <input id="category" type="text" required />
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label for="description">Product Description</label>
+                <textarea id="description" rows="3" required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input id="price" type="number" min="0" step="0.01" required />
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input id="quantity" type="number" min="1" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="condition">Condition</label>
+                    <select id="condition" required>
+                        <option value="" disabled selected
